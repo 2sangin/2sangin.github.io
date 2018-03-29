@@ -1,0 +1,47 @@
+---
+layout: post
+title: "OX 퀴즈"
+date: "2018-03-28 00:25:43 +0900"
+---
+# 1DP 1주 2일차
+[문제 바로가기](https://www.acmicpc.net/problem/8958)
+
+카카오 코딩테스트에서 비슷한 문제가 나왔었다. 이것보다는 좀 더 요구사항이 많았던 거고 당시에도 무난히 풀긴 했지만 다른 사람들과의 코드도 비교가 가능하니 복습을 겸해서 다시 풀어봤다.
+
+카카오의 문제를 풀었던 방식을 의식적으로 떠올리려고 한 건 아니지만 비슷한 방식으로 풀었다. flag를 두지 않고 그냥 배열에 각 스코어를 저장했는데, 지금 글 쓰면서 다시 생각해보니 역시 동시에 사용하는 공간은 최대 2개 뿐이다.
+
+그래서 단순하게 배열을 사용하지 않은 버전의 코드로 올린다. 다른 사람들이 자바로 한 것 중에서는 가장 빠른 게 60ms인데 난 100ms가 한계다.
+
+{% highlight java linenos %}
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class Main {
+  public static void main(final String[] args) {
+    try ( BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)) ) {
+      final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+
+      for (int loop = Integer.valueOf(reader.readLine()); loop > 0; loop--) {
+        int answer;
+        int total = 0, score = 0;
+        while ((answer = reader.read()) != '\n') {
+          if (answer == 'O') {
+            total += ++score;
+          } else {
+            score = 0;
+          }
+        }
+        writer.write(Integer.toString(total));
+        writer.newLine();
+      }
+      writer.flush();
+      writer.close();
+    } catch (NumberFormatException | IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+{% endhighlight %}
