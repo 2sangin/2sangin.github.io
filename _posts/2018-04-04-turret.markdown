@@ -1,0 +1,90 @@
+---
+layout: post
+title: "1002번: 터렛"
+date: "2018-04-04 23:52:40 +0900"
+---
+# 1DP 2주 6일차
+[문제 바로가기](https://www.acmicpc.net/problem/1002 "1002: 터렛")
+
+문제를 어떻게 풀어야 하는지만 알면 코드는 어렵지 않다.
+두 원이 겹쳐서 두 점이 만나는지 혹은 내접, 외접하는 원인지를 확인하는 문제다.
+그런데 두 원의 관계에 대한 경우의 수를 놓치거나 해서 좀 오래 걸림...
+
+{% highlight java %}
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
+
+public class Main {
+    static Scanner sc = new Scanner(System.in);
+
+    static BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
+
+
+    public static void main(final String[] args) throws Exception {
+        final int tc = sc.nextInt();
+
+        long x1, y1, x2, y2;
+        int r1, r2;
+        for (int i = 0; i < tc; i++) {
+            x1 = sc.nextInt();
+            y1 = sc.nextInt();
+            r1 = sc.nextInt();
+
+            x2 = sc.nextInt();
+            y2 = sc.nextInt();
+            r2 = sc.nextInt();
+
+            final double distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+            final int longR = Math.max(r1, r2);
+            final int shortR = Math.min(r1, r2);
+
+            int count = 0; // 두 원이 만나지 않는 경우: 외부에 있을 때, 내부에 있을 때, 동심원이면서 반지름이 다를 때
+            if (distance == 0 && longR == shortR) { // 동심원이면서 반지름도 같을 때
+                count = -1;
+            } else if (longR - shortR == distance || distance == longR + shortR) { // 내접 또는 외접
+                count = 1;
+            } else if (longR - shortR < distance && distance < longR + shortR) { // 두 원이 만나서 두 점이 겹치는 경우: 두 원이 외부에 있거나 큰 원 내부에 작은 원이 있는 경우
+                count = 2;
+            }
+            wr.write(count + "\n");
+        }
+        wr.flush();
+        wr.close();
+    }
+
+
+    static class Scanner {
+        private BufferedReader reader;
+
+        private StringTokenizer tokenizer;
+
+
+        public Scanner(final InputStream is) {
+            this.reader = new BufferedReader(new InputStreamReader(is));
+        }
+
+
+        public String next() {
+            if (this.tokenizer == null || !this.tokenizer.hasMoreTokens()) {
+                try {
+                    this.tokenizer = new StringTokenizer(this.reader.readLine());
+                } catch (final IOException e) {
+                    throw new NoSuchElementException(e.getMessage());
+                }
+            }
+            return this.tokenizer.nextToken();
+        }
+
+
+        public int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
+}
+{% endhighlight %}
