@@ -33,10 +33,11 @@ java 8에서 추가된 특징 3가지
 
 메소드 sync, async 차이
 
-spring 기본 스레드 풀은?
-
+spring 기본 스레드 풀은?  
 기본 스레드 풀 사용시 동작은?
 
 Optional 객체를 만드는 3가지 방법
 
 Optional.ofNullable 에 null을 넣을 시 반환되는 것은?
+
+스레드의 컨텍스트 스위칭에 대해서 설명
