@@ -9,11 +9,11 @@
 title: 새벽 코딩
 email: silee9019@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  현재는 1DP를 진행하는 과정을 기록하는 블로그
+  블로그
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://atmost1815.github.io" # the base hostname & protocol for your site
+url: "https://2sangin.github.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
-github_username: atmost1815
+github_username: 2sangin
 
 timezone: Asia/Seoul
 
